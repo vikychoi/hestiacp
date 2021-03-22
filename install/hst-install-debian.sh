@@ -62,7 +62,7 @@ elif [ "$release" -eq 10 ]; then
         quota e2fslibs bsdutils e2fsprogs curl imagemagick fail2ban dnsutils
         bsdmainutils cron hestia=${HESTIA_INSTALL_VER} hestia-nginx hestia-php expect
         libmail-dkim-perl unrar-free vim-common acl sysstat rsyslog openssh-server
-        util-linux ipset libapache2-mod-ruid2 libapache2-mpm-itk zstd lsb-release"
+        util-linux ipset libapache2-mpm-itk zstd lsb-release"
 fi
 
 installer_dependencies="apt-transport-https curl dirmngr gnupg wget ca-certificates"
