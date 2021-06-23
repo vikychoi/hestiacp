@@ -3,10 +3,12 @@
 session_start();
 
 define('HESTIA_CMD', '/usr/bin/sudo /usr/local/hestia/bin/');
-if ($_SESSION['RELEASE_BRANCH'] == 'release' && $_SESSION['DEBUG_MODE'] == 'false') {
-    define('JS_LATEST_UPDATE','v=' . $_SESSION['VERSION']);
-}else{
-    define('JS_LATEST_UPDATE','r=' . time());
+if (isset($_SESSION['RELEASE_BRANCH']) && isset($_SESSION['DEBUG_MODE']) ){
+    if ($_SESSION['RELEASE_BRANCH'] == 'release' && $_SESSION['DEBUG_MODE'] == 'false') {
+        define('JS_LATEST_UPDATE','v=' . $_SESSION['VERSION']);
+    }else{
+        define('JS_LATEST_UPDATE','r=' . time());
+    }
 }
 define('DEFAULT_PHP_VERSION', 'php-' . exec('php -r "echo (float)phpversion();"'));
 
@@ -19,8 +21,10 @@ function destroy_sessions(){
 $i = 0;
 
 // Saving user IPs to the session for preventing session hijacking
-$user_combined_ip = $_SERVER['REMOTE_ADDR'];
-
+$user_combined_ip = '';
+if (isset($_SERVER['REMOTE_ADDR'])) {
+    $user_combined_ip .= $_SERVER['REMOTE_ADDR'];
+}
 if (isset($_SERVER['HTTP_CLIENT_IP'])) {
     $user_combined_ip .= '|' . $_SERVER['HTTP_CLIENT_IP'];
 }
@@ -298,9 +302,9 @@ function send_email($to, $subject, $mailtext, $from) {
     $sep = chr(13) . chr(10);
     $disposition = 'inline';
     $subject = "=?$charset?B?" . base64_encode($subject) . '?=';
-    $header = "From: $from \nX-Priority: $priority\nCC:\n";
-    $header .= "Mime-Version: 1.0\nContent-Type: text/plain; charset=$charset \n";
-    $header .= "Content-Transfer-Encoding: $ctencoding\nX-Mailer: Php/libMailv1.3\n";
+    $header = "From: $from \r\nX-Priority: $priority\r\n";
+    $header .= "Mime-Version: 1.0\r\nContent-Type: text/plain; charset=$charset \r\n";
+    $header .= "Content-Transfer-Encoding: $ctencoding\r\nX-Mailer: Php/libMailv1.3\r\n";
     $message = $mailtext;
     mail($to, $subject, $message, $header);
 }
