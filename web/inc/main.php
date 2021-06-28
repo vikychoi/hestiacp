@@ -1,15 +1,7 @@
 <?php
-
 session_start();
 
 define('HESTIA_CMD', '/usr/bin/sudo /usr/local/hestia/bin/');
-if (isset($_SESSION['RELEASE_BRANCH']) && isset($_SESSION['DEBUG_MODE']) ){
-    if ($_SESSION['RELEASE_BRANCH'] == 'release' && $_SESSION['DEBUG_MODE'] == 'false') {
-        define('JS_LATEST_UPDATE','v=' . $_SESSION['VERSION']);
-    }else{
-        define('JS_LATEST_UPDATE','r=' . time());
-    }
-}
 define('DEFAULT_PHP_VERSION', 'php-' . exec('php -r "echo (float)phpversion();"'));
 
 function destroy_sessions(){
@@ -61,6 +53,15 @@ if ($_SESSION['user_combined_ip'] != $user_combined_ip && $_SERVER['REMOTE_ADDR'
 }
 // Load Hestia Config directly
     load_hestia_config();
+
+if (isset($_SESSION['RELEASE_BRANCH']) && isset($_SESSION['DEBUG_MODE']) ){
+    if ($_SESSION['RELEASE_BRANCH'] == 'release' && $_SESSION['DEBUG_MODE'] == 'false') {
+        define('JS_LATEST_UPDATE','v=' . $_SESSION['VERSION']);
+        #error_reporting(NULL);
+    }else{
+        define('JS_LATEST_UPDATE','r=' . time());
+    }
+}
 
 // Check system settings
 if ((!isset($_SESSION['VERSION'])) && (!defined('NO_AUTH_REQUIRED'))) {
@@ -397,4 +398,14 @@ function backendtpl_with_webdomains() {
  */
 function validate_password($password){
     return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(.){8,}$/', $password);
+}
+
+function dump_array($array){
+    foreach($array as $key => $value){
+        if(is_array($value)){
+            echo '<i>array {</i>'.dump_array($value).'<i>}</i>';
+        }else{
+            echo '<b>'.$key.':</b> '.$value.' ';
+        }
+    }
 }

@@ -1,5 +1,4 @@
 <?php
-error_reporting(NULL);
 ob_start();
 $TAB = 'DNS';
 
@@ -150,14 +149,14 @@ if (!empty($_POST['ok_rec'])) {
 }
 
 
-$v_ns1 = str_replace("'", "", $v_ns1);
-$v_ns2 = str_replace("'", "", $v_ns2);
-$v_ns3 = str_replace("'", "", $v_ns3);
-$v_ns4 = str_replace("'", "", $v_ns4);
-$v_ns5 = str_replace("'", "", $v_ns5);
-$v_ns6 = str_replace("'", "", $v_ns6);
-$v_ns7 = str_replace("'", "", $v_ns7);
-$v_ns8 = str_replace("'", "", $v_ns8);
+if(!empty($v_ns1)) $v_ns1 = str_replace("'", "", $v_ns1);
+if(!empty($v_ns2)) $v_ns2 = str_replace("'", "", $v_ns2);
+if(!empty($v_ns3)) $v_ns3 = str_replace("'", "", $v_ns3);
+if(!empty($v_ns4)) $v_ns4 = str_replace("'", "", $v_ns4);
+if(!empty($v_ns5)) $v_ns5 = str_replace("'", "", $v_ns5);
+if(!empty($v_ns6)) $v_ns6 = str_replace("'", "", $v_ns6);
+if(!empty($v_ns7)) $v_ns7 = str_replace("'", "", $v_ns7);
+if(!empty($v_ns8)) $v_ns9 = str_replace("'", "", $v_ns8);
 
 if(empty($v_ip) && count($v_ips) > 0) {
     $ip = array_key_first($v_ips);
@@ -176,20 +175,21 @@ $v_template = $user_config[$user]['DNS_TEMPLATE'];
 
 if (empty($_GET['domain'])) {
     // Display body for dns domain
-
+    if (empty($v_domain)) $v_domain = '';
     if (empty($v_ttl)) $v_ttl = 14400;
     if (empty($v_exp)) $v_exp = date('Y-m-d', strtotime('+1 year'));
     if (empty($v_ns1)) {
         exec (HESTIA_CMD."v-list-user-ns ".$user." json", $output, $return_var);
-        $nameservers = json_decode(implode('', $output), true);
-        $v_ns1 = str_replace("'", "", $nameservers[0]);
-        $v_ns2 = str_replace("'", "", $nameservers[1]);
-        $v_ns3 = str_replace("'", "", $nameservers[2]);
-        $v_ns4 = str_replace("'", "", $nameservers[3]);
-        $v_ns5 = str_replace("'", "", $nameservers[4]);
-        $v_ns6 = str_replace("'", "", $nameservers[5]);
-        $v_ns7 = str_replace("'", "", $nameservers[6]);
-        $v_ns8 = str_replace("'", "", $nameservers[7]);
+        $nameservers = json_decode(implode('',$output), true);
+        if(!empty($nameservers[0])) $v_ns1 = str_replace("'", "", $nameservers[0]);
+        if(!empty($nameservers[1])) $v_ns2 = str_replace("'", "", $nameservers[1]);
+        if(!empty($nameservers[2])) $v_ns3 = str_replace("'", "", $nameservers[2]);
+        if(!empty($nameservers[3])) $v_ns4 = str_replace("'", "", $nameservers[3]);
+        if(!empty($nameservers[4])) $v_ns5 = str_replace("'", "", $nameservers[4]);
+        if(!empty($nameservers[5])) $v_ns6 = str_replace("'", "", $nameservers[5]);
+        if(!empty($nameservers[6])) $v_ns7 = str_replace("'", "", $nameservers[6]);
+        if(!empty($nameservers[7])) $v_ns8 = str_replace("'", "", $nameservers[7]);
+
         unset($output);
     }
 

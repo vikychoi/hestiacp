@@ -2,22 +2,18 @@
 <div class="debug-panel-contents animated fadeIn" id="debug-panel" style="display:none;">
 	<?php
 		echo "<h3>Server Variables</h3>";
-		foreach ($_SERVER as $key=>$val)
-		echo "<b>".$key."= </b> ".$val."  ";
+		dump_array($_SERVER);
 	?>
 	<?php
 		echo "<h3>Session Variables</h3>";
-		foreach ($_SESSION as $key=>$val)
-		echo "<b>".$key."= </b> ".$val."  ";
+		dump_array($_SESSION);
 	?>
 	<?php
 		echo "<h3>POST Variables</h3>";
-		foreach ($_POST as $key=>$val)
-		echo "<b>".$key."= </b> ".$val."  ";  
+		dump_array($_POST);
 	?>
 	<?php
 		echo "<h3>GET Variables</h3>";
-		foreach ($_GET as $key=>$val)
-		echo "<b>".$key."= </b> ".$val."  ";
+		dump_array($_GET);
 	?>
 </div>

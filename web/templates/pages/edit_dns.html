@@ -50,8 +50,12 @@
 											$msg_id = 'vst-ok';
 										}
 									}
-								?>
-								<span class="<?=$msg_id;?>"> <i class="fas <?=$msg_icon;?>"></i> <?=$msg_text;?></span>
+                                if(!empty($msg_id)){
+                                ?>
+                                    <span class="<?=$msg_id;?>"> <i class="fas <?=$msg_icon;?>"></i> <?=$msg_text;?></span>
+                                <?php 
+                                } 
+                                ?>
 							</td>
 						</tr>
 						<tr>

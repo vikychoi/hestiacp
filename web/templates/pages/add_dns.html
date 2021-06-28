@@ -49,8 +49,10 @@
 											$msg_id = 'vst-ok';
 										}
 									}
+                                if(!empty($msg_id)){
 								?>
 								<span class="<?=$msg_id;?>"> <i class="fas <?=$msg_icon;?>"></i> <?=$msg_text;?></span>
+                                <?php } ?>
 							</td>
 						</tr>
 						<?php if (($user == 'admin') && (($_GET['accept'] !== "true")))  {?>
@@ -170,7 +172,7 @@
 											</td>
 										</tr>
 										<?php
-											if($v_ns3) {
+											if(!empty($v_ns3)) {
 												echo '<tr>
 													<td>
 														<input type="text" size="20" class="vst-input" name="v_ns3" value="'.htmlentities(trim($v_ns3, "'")).'">
@@ -178,7 +180,7 @@
 													</td>
 												</tr>';
 											}
-											if($v_ns4) {
+											if(!empty($v_ns4)) {
 												echo '<tr>
 													<td>
 														<input type="text" size="20" class="vst-input" name="v_ns4" value="'.htmlentities(trim($v_ns4, "'")).'">
@@ -186,7 +188,7 @@
 													</td>
 												</tr>';
 											}
-											if($v_ns5) {
+											if(!empty($v_ns5)) {
 												echo '<tr>
 													<td>
 														<input type="text" size="20" class="vst-input" name="v_ns5" value="'.htmlentities(trim($v_ns5, "'")).'">
@@ -194,7 +196,7 @@
 													</td>
 												</tr>';
 											}
-											if($v_ns6) {
+											if(!empty($v_ns6)) {
 												echo '<tr>
 													<td>
 														<input type="text" size="20" class="vst-input" name="v_ns6" value="'.htmlentities(trim($v_ns6, "'")).'">
@@ -202,7 +204,7 @@
 													</td>
 												</tr>';
 											}
-											if($v_ns7) {
+											if(!empty($v_ns7)) {
 												echo '<tr>
 													<td>
 														<input type="text" size="20" class="vst-input" name="v_ns7" value="'.htmlentities(trim($v_ns7, "'")).'">
@@ -210,7 +212,7 @@
 													</td>
 												</tr>';
 											}
-											if($v_ns8) {
+											if(!empty($v_ns8)) {
 												echo '<tr>
 													<td>
 														<input type="text" size="20" class="vst-input" name="v_ns8" value="'.htmlentities(trim($v_ns8, "'")).'">
@@ -219,7 +221,7 @@
 												</tr>';
 											}
 										?>
-										<tr class="add-ns" <?php if ($v_ns8) echo 'style="display:none;"' ; ?> >
+										<tr class="add-ns" <?php if (!empty($v_ns8)) echo 'style="display:none;"' ; ?> >
 											<td class="step-top-small">
 												<span class="add-ns-button additional-control add"><?=_('Add one more Name Server');?></span>
 											</td>
