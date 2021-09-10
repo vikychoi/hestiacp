@@ -6,7 +6,7 @@ session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/inc/main.php');
 
 // Check token
-if ((!isset($_GET['token'])) || ($_SESSION['token'] != $_GET['token'])) {
+if ((!isset($_GET['token'])) || ($_SESSION['token'] !== $_GET['token'])) {
     header('location: /login/');
     exit;
 }
